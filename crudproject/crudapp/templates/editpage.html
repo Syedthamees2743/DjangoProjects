@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Update Products</h1>
+    <form action="{% url 'editpage' edpro.id %}" method="post">
+      {% csrf_token %}
+      <label>Product Name :</label>
+      <input
+        type="text"
+        name="pname"
+        value="{{ edpro.prodname }}"
+      /><br /><br />
+
+      <label>Quantity :</label>
+      <input
+        type="number"
+        name="qty"
+        value="{{ edpro.quantity }}"
+      /><br /><br />
+
+      <label>Description :</label>
+      <input
+        type="text"
+        name="des"
+        value="{{ edpro.description }}"
+      /><br /><br />
+
+      <label>Price :</label>
+      <input type="number" name="prc" value="{{ edpro.price }}" /><br /><br />
+
+      <input type="submit" value="Update" />
+      <a href="{% url 'viewproduct' %}">Edit</a>
+    </form>
+  </body>
+</html>

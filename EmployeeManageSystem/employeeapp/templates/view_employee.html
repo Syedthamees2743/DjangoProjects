@@ -1,0 +1,63 @@
+{% load static %}
+<!doctype html>
+<html>
+  <head>
+    <title>Employee Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div class="table-container">
+      <div class="header-section">
+        <h2 class="table-title">Employee Management Dashboard</h2>
+
+        <a href="/" class="add-btn"> + Add Employee </a>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Department</th>
+              <th>Salary</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for emp in employees %}
+            <tr>
+              <td data-label="ID">{{ emp.id }}</td>
+
+              <td data-label="Name">{{ emp.name }}</td>
+
+              <td data-label="Email">{{ emp.email }}</td>
+
+              <td data-label="Department">{{ emp.department }}</td>
+
+              <td data-label="Salary">₹ {{ emp.salary }}</td>
+
+              <td data-label="Edit">
+                <a class="edit-btn" href="/editemployee/{{ emp.id }}/">
+                  ✏ Edit
+                </a>
+              </td>
+
+              <td data-label="Delete">
+                <a class="delete-btn" href="/deleteemployee/{{ emp.id }}/">
+                  🗑 Delete
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

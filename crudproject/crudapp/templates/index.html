@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add Products</h1>
+    <form action="{% url 'addproduct' %}" method="post">
+    {% csrf_token %}
+    <label for="">Product Name :</label> 
+    <input type="text" name="pname"><br><br>
+    <label for="quantity">Quantity :</label> 
+    <input type="number" name="qty" id="quantity"><br><br>
+    <label for="">Description :</label> 
+    <input type="text" name="des"><br><br>
+    <label for="price">Price :</label>
+    <input type="number" name="prc" id="price" ><br><br>
+    <input type="submit"> <br> <br>
+    <a href="{% url 'viewproduct' %}">View Products List</a>
+    </form>
+</body>
+</html>
