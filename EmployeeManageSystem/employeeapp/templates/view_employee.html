@@ -5,7 +5,7 @@
     <title>Employee Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
   </head>
   <body>
     <div class="table-container">
@@ -34,7 +34,7 @@
             <tr>
               <td data-label="ID">{{ emp.id }}</td>
 
-              <td data-label="Name">{{ emp.name }}</td>
+              <td class="cell-name" data-label="Name">{{ emp.name }}</td>
 
               <td data-label="Email">{{ emp.email }}</td>
 
