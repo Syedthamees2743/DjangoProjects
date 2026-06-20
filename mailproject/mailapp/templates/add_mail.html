@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3 style="text-align: center;">Sending Mail...</h3>
+    {% csrf_token %}
+    <form action="">
+        <label for="">Student Id </label>
+        <input type="text" name="studentid" id="">
+        <br><br>
+        <label for="">Subject:</label>
+        <input type="text" name="subject" id="">
+        <br><br>
+        <label for="">Mail_id:</label>
+        <input type="text" name="mail" >
+        <br><br>
+        <input type="submit" value="Send">
+    </form>
+</body>
+</html>

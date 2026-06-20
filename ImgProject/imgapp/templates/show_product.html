@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Product Name</td>
+            <td>Product Description</td>
+            <td>Product Price</td>
+            <td>Product Image</td>
+            <td>Action</td>
+        </tr>
+
+        {% for p in prdts %}
+        <tr>
+            <td>{{ p.prodname }}</td>
+            <td>{{ p.proddes }}</td>
+            <td>{{ p.prodprc }}</td>
+            <td>
+                {% if p.image %}
+                    <img src="{{ p.image.url }}" alt="{{ p.prodname }}" width="100">
+                {% else %}
+                    No image
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'edit_product' p.id %}">Edit</a>
+                <a href="{% url 'delete_product' p.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

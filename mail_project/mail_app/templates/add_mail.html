@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Registration</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background-color:#1a1a2e;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .container{
+            background:white;
+            padding:30px;
+            width:400px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px gray;
+        }
+
+        h2{
+            text-align:center;
+            color:#0f3460;
+        }
+
+        label{
+            font-weight:bold;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            margin-top:5px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
+
+        button{
+            width:100%;
+            padding:10px;
+            background:#0f3460;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#16213e;
+        }
+
+        .success{
+            color:green;
+            text-align:center;
+            margin-bottom:15px;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Employee Registration</h2>
+
+    {% if success %}
+        <div class="success">
+            Mail Sent Successfully
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Employee ID</label>
+        <input type="text" name="employeeid" required>
+
+        <label>Employee Name</label>
+        <input type="text" name="employeename" required>
+
+        <label>Subject</label>
+        <input type="text" name="subject" required>
+
+        <label>Employee Email</label>
+        <input type="email" name="mail" required>
+
+        <button type="submit">Send Mail</button>
+    </form>
+
+</div>
+
+</body>
+</html>
