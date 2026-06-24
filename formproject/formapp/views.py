@@ -25,4 +25,21 @@ def show_employee(request):
 def edit_employee(request,pk):
     empl=Employee.objects.get(id=pk)
     detail=employeeforms(instance=empl)
-    return render(request,'edit_employee.html',{'form':detail})
+    return render(request,'edit_employee.html',{'form':detail, 'empl':empl})
+
+def update_employee(request,pk):
+    empl = Employee.objects.get(id=pk)
+    if request.method == 'POST':
+        form = employeeforms(request.POST, instance=empl)
+        if form.is_valid():
+            form.save()
+            return redirect('show_employee')
+    else:
+        form = employeeforms(instance=empl)
+
+    return render(request, 'edit_employee.html', {'form': form, 'empl': empl})
+
+def delete_employee(request,pk):
+    empl = Employee.objects.get(id=pk)
+    empl.delete()
+    return redirect('show_employee')

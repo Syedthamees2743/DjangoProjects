@@ -22,7 +22,7 @@
             <td>{{i.emp_department}}</td>
             <td>
                 <a href="{% url 'edit_employee' i.id %}">Edit</a>
-                <a href="">Delete</a>
+                <a href="{% url 'delete_employee' i.id %}">Delete</a>
             </td>
 
         </tr>
