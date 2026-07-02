@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}IRCTC NextGen - Book Train Tickets Online{% endblock %}
+{% block content %}
+
+<!-- IRCTC Journey Planner -->
+<div class="jp-banner">
+    <div class="jp-banner-overlay">
+        <div class="container">
+            <div class="jp-box">
+                <div class="jp-box-header">
+                    <div class="jp-logo">🚆</div>
+                    <div>
+                        <h2>BOOK YOUR TICKET</h2>
+                        <p>Indian Railways - The largest rail network in the world</p>
+                    </div>
+                </div>
+                
+                {% if user.is_authenticated %}
+                <a href="{% url 'bookticket' %}" class="btn-jp-search">BOOK TICKET NOW →</a>
+                {% else %}
+                <div class="jp-login-msg">
+                    <p>Please <a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to book tickets</p>
+                </div>
+                {% endif %}
+
+                <div class="jp-stats">
+                    <div class="jp-stat">
+                        <h3>13000+</h3>
+                        <p>Trains Daily</p>
+                    </div>
+                    <div class="jp-stat-divider"></div>
+                    <div class="jp-stat">
+                        <h3>8000+</h3>
+                        <p>Stations</p>
+                    </div>
+                    <div class="jp-stat-divider"></div>
+                    <div class="jp-stat">
+                        <h3>23M+</h3>
+                        <p>Daily Passengers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Links -->
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="irctc-service-card">
+                <div class="irctc-svc-icon" style="background:#e3f2fd;">🚄</div>
+                <h5>Train Ticket</h5>
+                <p>Book train tickets for any destination across India</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="irctc-service-card">
+                <div class="irctc-svc-icon" style="background:#e8f5e9;">🛡️</div>
+                <h5>Cancel Ticket</h5>
+                <p>Easy cancellation with instant refund process</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="irctc-service-card">
+                <div class="irctc-svc-icon" style="background:#fff3e0;">📧</div>
+                <h5>Email Alerts</h5>
+                <p>Get instant email notifications for bookings</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="irctc-service-card">
+                <div class="irctc-svc-icon" style="background:#fce4ec;">👤</div>
+                <h5>My Account</h5>
+                <p>Manage your profile and booking history</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- News Section -->
+<div class="container pb-5">
+    <h4 class="irctc-section-title">LATEST UPDATES</h4>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="irctc-news-card">
+                <div class="news-tag">ANNOUNCEMENT</div>
+                <h6>Tatkal Booking Time Changed</h6>
+                <p>Revised timing for Tatkal booking now effective from all stations.</p>
+                <a href="#">Read More →</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="irctc-news-card">
+                <div class="news-tag" style="background:#2e7d32;">NEW FEATURE</div>
+                <h6>Profile Photo Upload</h6>
+                <p>Users can now upload profile photos from their account settings.</p>
+                <a href="{% url 'profile' %}">Go to Profile →</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="irctc-news-card">
+                <div class="news-tag" style="background:#ef6c00;">UPDATE</div>
+                <h6>100 New Trains Added</h6>
+                <p>Indian Railways adds 100 new trains across various routes.</p>
+                <a href="{% url 'trainlist' %}">View Trains →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

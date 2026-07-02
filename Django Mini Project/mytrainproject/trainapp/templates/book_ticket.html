@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}Book Ticket - IRCTC NextGen{% endblock %}
+{% block content %}
+
+<!-- IRCTC Booking Header -->
+<div class="irctc-booking-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2>🚆 BOOK TICKET</h2>
+                <p>IRCTC NextGen e-Ticketing System</p>
+            </div>
+            <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                <span class="booking-date-today">📅 Date: {% now "d-m-Y" %}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="irctc-booking-body">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+                <!-- Journey Form -->
+                <div class="irctc-white-card mb-4">
+                    <div class="irctc-card-header-blue">
+                        <h5>JOURNEY DETAILS</h5>
+                    </div>
+                    <div class="p-4">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-4">
+                                    <label class="irctc-label">FROM STATION</label>
+                                    {{ form.train }}
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="irctc-label">PASSENGER NAME</label>
+                                    {{ form.passenger_name }}
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="irctc-label">TRAVEL DATE</label>
+                                    {{ form.travel_date }}
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="irctc-label">SEAT NUMBER</label>
+                                    {{ form.seat_number }}
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="irctc-label">CLASS TYPE</label>
+                                    {{ form.class_type }}
+                                </div>
+                                <div class="col-md-4 d-flex align-items-end">
+                                    <button type="submit" class="btn-irctc-primary w-100" style="padding:12px;">BOOK NOW</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Rules Info Box -->
+                <div class="irctc-rules-box">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="rule-item">
+                                <div class="rule-icon">✓</div>
+                                <div>
+                                    <h6>Instant Confirmation</h6>
+                                    <p>Get your ticket confirmed immediately after booking.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="rule-item">
+                                <div class="rule-icon">✓</div>
+                                <div>
+                                    <h6>Email Notification</h6>
+                                    <p>Receive booking details on your email instantly.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="rule-item">
+                                <div class="rule-icon">✓</div>
+                                <div>
+                                    <h6>Easy Cancellation</h6>
+                                    <p>Cancel your ticket anytime from My Bookings.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

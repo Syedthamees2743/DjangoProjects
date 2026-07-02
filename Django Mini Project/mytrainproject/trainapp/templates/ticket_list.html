@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}My Tickets - TrainBook{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>My Tickets</h1>
+        <p>View all your bookings</p>
+        <div class="page-header-divider"></div>
+    </div>
+</div>
+<div class="container mb-5">
+    <div class="action-bar">
+        <h1>Booked Tickets</h1>
+        <a href="{% url 'bookticket' %}" class="btn btn-success">+ Book Ticket</a>
+    </div>
+    {% if display %}
+    <div class="table-container">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Passenger</th>
+                        <th>Train</th>
+                        <th>Travel Date</th>
+                        <th>Seat</th>
+                        <th>Class</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in display %}
+                    {% if ticket.is_cancelled %}
+                    <tr class="row-cancelled">
+                        <td>{{ ticket.passenger_name }}</td>
+                        <td>
+                            {% if ticket.train %}
+                                {{ ticket.train.train_name }}
+                            {% else %}
+                                Unknown Train
+                            {% endif %}
+                        </td>
+                        <td>{{ ticket.travel_date }}</td>
+                        <td>{{ ticket.seat_number }}</td>
+                        <td><span class="badge-class badge-{{ ticket.class_type|lower }}">{{ ticket.class_type }}</span></td>
+                        <td><span class="badge-cancelled">Cancelled</span></td>
+                        <td>-</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td><strong>{{ ticket.passenger_name }}</strong></td>
+                        <td>
+                            {% if ticket.train %}
+                                {{ ticket.train.train_name }}
+                            {% else %}
+                                Unknown Train
+                            {% endif %}
+                        </td>
+                        <td>{{ ticket.travel_date }}</td>
+                        <td>{{ ticket.seat_number }}</td>
+                        <td><span class="badge-class badge-{{ ticket.class_type|lower }}">{{ ticket.get_class_type_display }}</span></td>
+                        <td><span class="status-confirmed">Active</span></td>
+                        <td>
+                            <a href="{% url 'edit_ticket' ticket.id %}" class="btn btn-warning btn-sm me-1">Edit</a>
+                            <a href="{% url 'cancel_ticket' ticket.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to cancel this ticket?')">Cancel</a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info">No tickets booked yet. <a href="{% url 'bookticket' %}" style="color:#0d47a1; font-weight:600;">Book a ticket now!</a></div>
+    {% endif %}
+</div>
+{% endblock %}

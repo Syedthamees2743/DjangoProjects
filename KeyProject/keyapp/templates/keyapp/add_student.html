@@ -1,0 +1,66 @@
+{% extends 'keyapp/base.html' %} {% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-header text-center">
+        <h2>Add Student Details</h2>
+      </div>
+
+      <div class="card-body">
+        <form method="post" action="{% url 'AddStudent' %}">
+          {% csrf_token %}
+
+          <input
+            type="text"
+            name="student_name"
+            class="form-control"
+            placeholder="Enter Student Name"
+          />
+
+          <br />
+
+          <input
+            type="email"
+            name="student_email"
+            class="form-control"
+            placeholder="Enter Email"
+          />
+
+          <br />
+
+          <input
+            type="text"
+            name="student_phone"
+            class="form-control"
+            placeholder="Enter Phone Number"
+          />
+
+          <br />
+
+          <textarea
+            name="student_address"
+            class="form-control"
+            placeholder="Enter Address"
+          ></textarea>
+
+          <br />
+
+          <select name="course" class="form-control">
+            <option value="">Select Course</option>
+
+            {% for course in courses %}
+            <option value="{{ course.id }}">{{ course.course_name }}</option>
+            {% endfor %}
+          </select>
+
+          <br />
+
+          <button class="btn btn-success w-100">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}My Profile - TrainBook{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>My Profile</h1>
+        <p>View your profile details</p>
+        <div class="page-header-divider"></div>
+    </div>
+</div>
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="profile-card">
+                <div class="profile-photo-wrapper">
+                    {% if profile and profile.photo %}
+                    <img src="{{ profile.photo.url }}" alt="Profile Photo" class="profile-photo">
+                    {% else %}
+                    <div class="profile-photo-placeholder">👤</div>
+                    {% endif %}
+                </div>
+                <table class="table profile-table">
+                    <tr><th>Username</th><td>{{ user.username }}</td></tr>
+                    <tr><th>First Name</th><td>{{ user.first_name }}</td></tr>
+                    <tr><th>Last Name</th><td>{{ user.last_name }}</td></tr>
+                    <tr><th>Email</th><td>{{ user.email }}</td></tr>
+                    {% if profile %}
+                    <tr><th>Phone</th><td>{{ profile.phone }}</td></tr>
+                    {% endif %}
+                </table>
+                <div class="text-center pb-4">
+                    <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

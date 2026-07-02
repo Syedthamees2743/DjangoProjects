@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}My Bookings - IRCTC NextGen{% endblock %}
+{% block content %}
+
+<div class="irctc-page-top">
+    <div class="container">
+        <h2>MY BOOKINGS</h2>
+        <p>View and manage your booked tickets</p>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="irctc-breadcrumb">
+            <a href="{% url 'home' %}">Home</a> <span>›</span> <span>My Bookings</span>
+        </div>
+        <a href="{% url 'bookticket' %}" class="btn-irctc-primary">+ Book New Ticket</a>
+    </div>
+
+    {% if display %}
+    <div class="irctc-white-card p-0">
+        <div class="table-responsive">
+            <table class="irctc-table">
+                <thead>
+                    <tr>
+                        <th>PAX NAME</th>
+                        <th>TRAIN</th>
+                        <th>DATE</th>
+                        <th>SEAT</th>
+                        <th>CLASS</th>
+                        <th>STATUS</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in display %}
+                    {% if ticket.is_cancelled %}
+                    <tr class="row-cancelled">
+                        <td>{{ ticket.passenger_name }}</td>
+                        <td>{{ ticket.train.train_name }}<br><small style="color:#999;">{{ ticket.train.train_number }}</small></td>
+                        <td>{{ ticket.travel_date|date:"d-m-Y" }}</td>
+                        <td>{{ ticket.seat_number }}</td>
+                        <td>{{ ticket.class_type }}</td>
+                        <td><span class="status-cancelled">CANCELLED</span></td>
+                        <td>-</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td><strong>{{ ticket.passenger_name }}</strong></td>
+                        <td>{{ ticket.train.train_name }}<br><small style="color:#666;">{{ ticket.train.train_number }}</small></td>
+                        <td>{{ ticket.travel_date|date:"d-m-Y" }}</td>
+                        <td>{{ ticket.seat_number }}</td>
+                        <td>{{ ticket.class_type }}</td>
+                        <td><span class="status-confirmed">CONFIRMED</span></td>
+                        <td>
+                            <a href="{% url 'edit_ticket' ticket.id %}" class="btn-irctc-sm btn-irctc-warning">Edit</a>
+                            <a href="{% url 'cancel_ticket' ticket.id %}" class="btn-irctc-sm btn-irctc-danger" onclick="return confirm('Cancel this ticket?')">Cancel</a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    <div class="irctc-empty">
+        <p>📭 No bookings found</p>
+        <a href="{% url 'bookticket' %}">Book your first ticket →</a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

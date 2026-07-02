@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Register - IRCTC NextGen{% endblock %}
+{% block content %}
+<div class="login-split-container">
+    <div class="login-image-side" style="background: linear-gradient(135deg, #00695c 0%, #004d40 100%);">
+        <div class="login-train-visual">🚉</div>
+        <h2>Create Account</h2>
+        <p>Join IRCTC NextGen for a seamless ticket booking experience.</p>
+    </div>
+    <div class="login-form-side">
+        <div class="login-form-box">
+            <h3>Agent Registration</h3>
+            <p>Fill in the details below to create your account</p>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">First Name</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Last Name</label>
+                        {{ form.last_name }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">User Name</label>
+                    {{ form.username }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Password</label>
+                        {{ form.password }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        {{ form.confirm_password }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-2" style="padding:12px; background:#00695c; border:none;">Register</button>
+            </form>
+            <p class="text-center mt-3" style="font-size:13px; color:#757575;">Already have an account? <a href="{% url 'login' %}" style="color:#1a237e; font-weight:600;">Login here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

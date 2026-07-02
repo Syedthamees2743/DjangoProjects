@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %>Cancel Ticket - IRCTC NextGen{% endblock %}
+{% block content %}
+<div class="irctc-page-top" style="background:#c62828;">
+    <div class="container">
+        <h2>⚠️ CANCEL TICKET</h2>
+        <p>This action cannot be undone</p>
+    </div>
+</div>
+<div class="container pb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="irctc-white-card">
+                <div class="irctc-card-header-red">
+                    <h5>CONFIRM CANCELLATION</h5>
+                </div>
+                <div class="p-4 text-center">
+                    <div style="font-size:60px; margin-bottom:15px;">⚠️</div>
+                    <h4 style="color:#c62828; font-weight:700; margin-bottom:10px;">Are you sure?</h4>
+                    <p style="color:#666; margin-bottom:25px; font-size:14px;">Once cancelled, a cancellation email will be sent to your registered email address. This action cannot be reversed.</p>
+                    <div class="d-flex gap-3 justify-content-center">
+                        <a href="{% url 'cancel_ticket' ticket.id %}" class="btn-irctc-danger" style="padding:12px 40px;">Yes, Cancel</a>
+                        <a href="{% url 'ticketlist' %}" class="btn-irctc-secondary" style="padding:12px 40px;">No, Go Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

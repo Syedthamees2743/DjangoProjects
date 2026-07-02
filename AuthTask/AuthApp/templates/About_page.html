@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}About - AuthTask{% endblock %}
+
+{% block content %}
+<section class="card">
+    <div>
+        <h2 class="card-title">About AuthTask</h2>
+        <p class="subtext">AuthTask is designed to demonstrate a polished Django authentication flow with modern, custom styles and smooth button motion.</p>
+    </div>
+    <div class="content-grid">
+        <div>
+            <p>Built with a clean component-based UI, this sample app separates shared page structure from individual content pages using Django templates.</p>
+            <p>The navigation bar, typography, and button interactions are all managed with internal CSS, so the interface remains lightweight and professional.</p>
+        </div>
+        <div>
+            <ul class="list-clean">
+                <li>Custom home page</li>
+                <li>Login form</li>
+                <li>Signup form</li>
+                <li>About / project summary page</li>
+            </ul>
+        </div>
+        <div class="button-row">
+            <button type="submit" class="button button-primary"  ><a href="{% url 'user_logout' %}">LogOut</a></button>
+        </div>
+    </div>
+</section>
+{% endblock %}

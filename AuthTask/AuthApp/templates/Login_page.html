@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Login - AuthTask{% endblock %}
+
+{% block content %}
+<section class="card">
+    <div>
+        <h2 class="card-title">Login</h2>
+        <p class="subtext">Access your account with secure login credentials.</p>
+    </div>
+    <form method="post" action="{% url 'user_login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="input-field" id="username" name="username" placeholder="Enter username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="input-field" id="password" name="password" placeholder="Enter password">
+        </div>
+        <div class="button-row">
+            <button type="submit" class="button button-primary">Login</button>
+            <a href="{% url 'signup_view' %}" class="button button-ghost">Create account</a>
+        </div>
+    </form>
+    <p class="text-muted">Don't have an account? <a class="link-inline" href="{% url 'signup_view' %}">Sign up</a></p>
+</section>
+{% endblock %}

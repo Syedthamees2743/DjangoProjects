@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Home - AuthTask{% endblock %}
+
+{% block content %}
+<section class="panel">
+    <div>
+        <h1 class="page-heading">Welcome to AuthTask</h1>
+        <p class="subtext">A professional Django authentication demo with clean form pages, custom navigation, and subtle button motion.</p>
+    </div>
+
+    <div class="button-row">
+        <a href="{% url 'login_view' %}" class="button button-primary">Login</a>
+        <a href="{% url 'signup_view' %}" class="button button-secondary">Signup</a>
+        <a href="{% url 'about' %}" class="button button-ghost">About</a>
+    </div>
+</section>
+{% endblock %}

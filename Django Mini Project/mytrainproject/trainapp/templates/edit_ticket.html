@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Edit Ticket - IRCTC NextGen{% endblock %}
+{% block content %}
+<div class="irctc-page-top">
+    <div class="container">
+        <h2>MODIFY BOOKING</h2>
+        <p>Change your booking details</p>
+    </div>
+</div>
+<div class="container pb-5">
+    <div class="irctc-breadcrumb mb-3">
+        <a href="{% url 'home' %}">Home</a> <span>›</span> <a href="{% url 'ticketlist' %}">My Bookings</a> <span>›</span> <span>Modify Booking</span>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="irctc-white-card">
+                <div class="irctc-card-header">
+                    <h5>CHANGE BOOKING DETAILS</h5>
+                </div>
+                <div class="p-4">
+                    <form method="POST" action="{% url 'update_ticket' ticket.id %}">
+                        {% csrf_token %}
+                        <div class="mb-3"><label class="irctc-label">Train</label>{{ form.train }}</div>
+                        <div class="mb-3"><label class="irctc-label">Passenger Name</label>{{ form.passenger_name }}</div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6"><label class="irctc-label">Travel Date</label>{{ form.travel_date }}</div>
+                            <div class="col-md-6"><label class="irctc-label">Seat Number</label>{{ form.seat_number }}</div>
+                        </div>
+                        <div class="mb-3"><label class="irctc-label">Class Type</label>{{ form.class_type }}</div>
+                        <div class="mt-4 text-center">
+                            <button type="submit" class="btn-irctc-warning" style="padding:12px 50px;">Update Booking</button>
+                            <a href="{% url 'ticketlist' %}" class="btn-irctc-secondary" style="padding:12px 50px;">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

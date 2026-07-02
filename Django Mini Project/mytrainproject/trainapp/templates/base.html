@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}IRCTC NextGen{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <div id="toast-container">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="toast-msg toast-{{ message.tags }}">
+                {% if message.tags == 'success' %}✅{% else %}❌{% endif %}
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Top Yellow Bar -->
+    <div class="irctc-topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="topbar-text">🚆 INDIAN RAILWAYS CATERING AND TOURISM CORPORATION</span>
+                </div>
+                <div class="col-md-6 text-end">
+                    <span class="topbar-text">IRCTC NextGen e-Ticketing</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navbar -->
+    {% if not user.is_authenticated %}
+    <nav class="irctc-navbar navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <span class="brand-logo">IRCTC</span>
+                <span class="brand-sub">NextGen</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav1">
+                <button class="sidebar-close-btn d-lg-none" id="sidebarClose">&times;</button>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link btn-nav-login" href="{% url 'login' %}">LOGIN</a></li>
+                    <li class="nav-item"><a class="nav-link btn-nav-register" href="{% url 'register' %}">REGISTER</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <nav class="irctc-navbar navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'dashboard' %}">
+                <span class="brand-logo">IRCTC</span>
+                <span class="brand-sub">NextGen</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav2">
+                <button class="sidebar-close-btn d-lg-none" id="sidebarClose2">&times;</button>
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'trainlist' %}">Trains</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'bookticket' %}">Book Ticket</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link user-pill" href="{% url 'profile' %}">👤 {{ user.username }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="irctc-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>CAREERS</h6>
+                    <ul>
+                        <li><a href="#">About IRCTC</a></li>
+                        <li><a href="#">Cantonments</a></li>
+                        <li><a href="#">IRCTC Offices</a></li>
+                        <li><a href="#">Zonal Railways</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6>IMPORTANT LINKS</h6>
+                    <ul>
+                        <li><a href="#">Rules</a></li>
+                        <li><a href="#">Policies</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6>CONTACT US</h6>
+                    <ul>
+                        <li><a href="#">Help & Support</a></li>
+                        <li><a href="#">Grievance</a></li>
+                        <li><a href="#">Feedback</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 IRCTC NextGen. Designed and Developed by CRIS. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var closeBtn1 = document.getElementById('sidebarClose');
+            var closeBtn2 = document.getElementById('sidebarClose2');
+            var overlay = document.getElementById('sidebarOverlay');
+            var nav1 = document.getElementById('nav1');
+            var nav2 = document.getElementById('nav2');
+
+            function closeSidebar() {
+                if (nav1) nav1.classList.remove('show');
+                if (nav2) nav2.classList.remove('show');
+                if (overlay) overlay.classList.remove('active');
+            }
+
+            if (closeBtn1) closeBtn1.addEventListener('click', closeSidebar);
+            if (closeBtn2) closeBtn2.addEventListener('click', closeSidebar);
+            if (overlay) overlay.addEventListener('click', closeSidebar);
+
+            document.querySelectorAll('.navbar-toggler').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    setTimeout(function() {
+                        if (document.querySelector('.collapse.show')) {
+                            overlay.classList.add('active');
+                        }
+                    }, 100);
+                });
+            });
+
+            document.querySelectorAll('.toast-msg').forEach(function(t) {
+                setTimeout(function() { t.remove(); }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>

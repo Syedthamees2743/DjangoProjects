@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - IRCTC NextGen{% endblock %}
+{% block content %}
+
+<div class="irctc-page-top">
+    <div class="container">
+        <h2>MY DASHBOARD</h2>
+        <p>Welcome back, {{ user.first_name|default:user.username }}!</p>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="irctc-stat-card">
+                <div class="stat-left bg-blue">
+                    <span class="stat-num">{{ total_tickets }}</span>
+                    <span class="stat-label">Total Bookings</span>
+                </div>
+                <div class="stat-right">📊</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="irctc-stat-card">
+                <div class="stat-left bg-green">
+                    <span class="stat-num">{{ upcoming_trips }}</span>
+                    <span class="stat-label">Upcoming Trips</span>
+                </div>
+                <div class="stat-right">🚆</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="irctc-stat-card">
+                <div class="stat-left bg-orange">
+                    <span class="stat-num">{{ total_tickets }}</span>
+                    <span class="stat-label">Total Tickets</span>
+                </div>
+                <div class="stat-right">🎫</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3 col-6">
+            <a href="{% url 'bookticket' %}" class="irctc-quick-action">
+                <span>🎫</span>
+                <span>Book Ticket</span>
+            </a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="{% url 'ticketlist' %}" class="irctc-quick-action">
+                <span>📋</span>
+                <span>My Tickets</span>
+            </a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="{% url 'trainlist' %}" class="irctc-quick-action">
+                <span>🚄</span>
+                <span>Trains</span>
+            </a>
+        </div>
+        <div class="col-md-3 col-6">
+            <a href="{% url 'profile' %}" class="irctc-quick-action">
+                <span>👤</span>
+                <span>Profile</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Recent Bookings Table -->
+    <div class="irctc-white-card">
+        <div class="irctc-card-header">
+            <h5>RECENT BOOKINGS</h5>
+        </div>
+        {% if recent_bookings %}
+        <div class="table-responsive">
+            <table class="irctc-table">
+                <thead>
+                    <tr>
+                        <th>PAX NAME</th>
+                        <th>TRAIN</th>
+                        <th>DATE</th>
+                        <th>SEAT</th>
+                        <th>CLASS</th>
+                        <th>STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in recent_bookings %}
+                    {% if ticket.is_cancelled %}
+                    <tr class="row-cancelled">
+                        <td>{{ ticket.passenger_name }}</td>
+                        <td>{{ ticket.train.train_name }}</td>
+                        <td>{{ ticket.travel_date|date:"d-m-Y" }}</td>
+                        <td>{{ ticket.seat_number }}</td>
+                        <td>{{ ticket.class_type }}</td>
+                        <td><span class="status-cancelled">CANCELLED</span></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td><strong>{{ ticket.passenger_name }}</strong></td>
+                        <td>{{ ticket.train.train_name }}</td>
+                        <td>{{ ticket.travel_date|date:"d-m-Y" }}</td>
+                        <td>{{ ticket.seat_number }}</td>
+                        <td>{{ ticket.class_type }}</td>
+                        <td><span class="status-confirmed">CONFIRMED</span></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="irctc-empty">
+            <p>📭 No bookings found</p>
+            <a href="{% url 'bookticket' %}">Book your first ticket →</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
